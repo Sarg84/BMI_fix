@@ -1,16 +1,19 @@
 # imt_fix
 
-A new Flutter project.
+My first flutter application. All code written by myself (+ some internet :) ).
+Idea and design was borrowed.
 
-## Getting Started
+Base BMI (imt for russia) calculator.
+Added: 
+ - gender check
+ - weight and age cannot be less than 0 
 
-This project is a starting point for a Flutter application.
+ StateManager - Provider.
 
-A few resources to get you started if this is your first Flutter project:
+ Testing: 
+ - emulator: Pixel 5 API 27
+ - Flutter SDK v2.10.2
+ - VSCode 1.67.00
+ - Provider 6.0.2
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+APK-file in APK folder.
