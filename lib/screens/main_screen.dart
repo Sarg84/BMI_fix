@@ -29,7 +29,7 @@ class MainScreen extends StatelessWidget {
           child: Row(
             children: [
               GenderButton(
-                title: 'МУЖЩИНА',
+                title: 'МУЖ',
                 icon: Icons.male,
                 onTap: () =>
                     Provider.of<GenderParameters>(context, listen: false)
@@ -38,7 +38,7 @@ class MainScreen extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               GenderButton(
-                title: 'ЖЕНЩИНА',
+                title: 'ЖЕН',
                 icon: Icons.female,
                 onTap: () =>
                     Provider.of<GenderParameters>(context, listen: false)
@@ -127,7 +127,10 @@ class GenderButton extends StatelessWidget {
               ),
               Text(
                 title,
-                style: const TextStyle(color: Colors.grey, fontSize: 14),
+                style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400),
               ),
             ],
           ),
