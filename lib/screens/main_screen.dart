@@ -24,11 +24,8 @@ class MainScreen extends StatelessWidget {
         backgroundColor: const Color(0xFF0a0e21),
       ),
       body: Column(children: [
-        const SizedBox(
-          height: 25,
-        ),
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(top: 15, left: 16, right: 16),
           child: Row(
             children: [
               GenderButton(
@@ -52,7 +49,7 @@ class MainScreen extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(top: 15, left: 16, right: 16),
           child: Container(
             decoration: BoxDecoration(
               color: const Color(0xFF1d1e33),
@@ -148,18 +145,12 @@ class SliderWidget extends StatelessWidget {
     final valueHeight = context.watch<HeightParameters>().height;
     return Column(
       children: [
-        const SizedBox(
-          height: 16,
-        ),
         const Text(
           'РОСТ',
           style: TextStyle(
             color: Colors.grey,
             fontSize: 20,
           ),
-        ),
-        const SizedBox(
-          height: 10,
         ),
         RichText(
           text: TextSpan(
@@ -223,7 +214,7 @@ class WeightAgeWidget extends StatelessWidget {
                 style: const TextStyle(color: Colors.grey, fontSize: 20),
               ),
               const SizedBox(
-                height: 20,
+                height: 5,
               ),
               Text(
                 data,
@@ -233,7 +224,7 @@ class WeightAgeWidget extends StatelessWidget {
                     fontWeight: FontWeight.w700),
               ),
               const SizedBox(
-                height: 10,
+                height: 3,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
