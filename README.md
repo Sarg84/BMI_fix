@@ -20,3 +20,7 @@ APK-file in APK folder.
 
 Screenshots:
 ![](https://github.com/Sarg84/bmi_fix/raw/master/img/01.png)
+![](https://github.com/Sarg84/bmi_fix/raw/master/img/02.png)
+![](https://github.com/Sarg84/bmi_fix/raw/master/img/03.png)
+![](https://github.com/Sarg84/bmi_fix/raw/master/img/04.png)
+![](https://github.com/Sarg84/bmi_fix/raw/master/img/05.png)
