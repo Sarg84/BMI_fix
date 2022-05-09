@@ -127,7 +127,7 @@ class GenderButton extends StatelessWidget {
               ),
               Text(
                 title,
-                style: const TextStyle(color: Colors.grey, fontSize: 18),
+                style: const TextStyle(color: Colors.grey, fontSize: 14),
               ),
             ],
           ),
