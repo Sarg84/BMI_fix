@@ -6,7 +6,8 @@ Idea and design was borrowed.
 Base BMI (imt for russia) calculator.
 Added: 
  - gender check
- - weight and age cannot be less than 0 
+ - weight and age cannot be less than 0
+ - russian language 
 
  StateManager - Provider.
 
@@ -16,7 +17,7 @@ Added:
  - VSCode 1.67.00
  - Provider 6.0.2
 
-APK-file in APK folder.
+APK-file for Android in APK folder.
 
 Screenshots:
 ![](https://github.com/Sarg84/bmi_fix/raw/master/img/01.png)
