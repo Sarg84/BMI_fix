@@ -19,4 +19,4 @@ Added:
 APK-file in APK folder.
 
 Screenshots:
-[Image alt](https://github.com/Sarg84/bmi_fix/raw/master/img/01.png)
+[Иллюстрация к проекту](https://github.com/Sarg84/bmi_fix/raw/master/img/01.png)
