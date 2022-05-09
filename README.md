@@ -1,4 +1,4 @@
-# imt_fix
+# imt_fix (Flutter/Dart)
 
 My first flutter application. All code written by myself (+ some internet :) ).
 Idea and design was borrowed.
@@ -18,6 +18,8 @@ Added:
  - Provider 6.0.2
 
 APK-file for Android in APK folder.
+
+Main code in lib folder.
 
 Screenshots:
 ![](https://github.com/Sarg84/bmi_fix/raw/master/img/01.png)
