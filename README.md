@@ -17,3 +17,6 @@ Added:
  - Provider 6.0.2
 
 APK-file in APK folder.
+
+Screenshots:
+[Image alt](https://github.com/Sa84/bmi_fix/raw/master/img/01.png)
