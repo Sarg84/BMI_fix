@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/gender_parameters.dart';
 import '../models/height_parameters.dart';
 import '../models/result.dart';
 import '../models/weight_age_parameters.dart';
+import 'result_list_screen.dart';
 import 'result_screen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -15,6 +17,7 @@ class MainScreen extends StatelessWidget {
     final age = context.watch<WeightAgeParameters>().age;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           '\nКалькулятор ИМТ',
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
@@ -23,69 +26,73 @@ class MainScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: const Color(0xFF0a0e21),
       ),
-      body: Column(children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 15, left: 16, right: 16),
-          child: Row(
-            children: [
-              GenderButton(
-                title: 'МУЖ',
-                icon: Icons.male,
-                onTap: () =>
-                    Provider.of<GenderParameters>(context, listen: false)
-                        .changeColorMale(),
-                color: context.watch<GenderParameters>().colorMale(),
+      body: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 15, left: 16, right: 16),
+              child: Row(
+                children: [
+                  GenderButton(
+                    title: 'МУЖ',
+                    icon: Icons.male,
+                    onTap: () =>
+                        Provider.of<GenderParameters>(context, listen: false)
+                            .changeColorMale(),
+                    color: context.watch<GenderParameters>().colorMale(),
+                  ),
+                  const SizedBox(width: 20),
+                  GenderButton(
+                    title: 'ЖЕН',
+                    icon: Icons.female,
+                    onTap: () =>
+                        Provider.of<GenderParameters>(context, listen: false)
+                            .changeColorFemale(),
+                    color: context.watch<GenderParameters>().colorFemale(),
+                  ),
+                ],
               ),
-              const SizedBox(width: 20),
-              GenderButton(
-                title: 'ЖЕН',
-                icon: Icons.female,
-                onTap: () =>
-                    Provider.of<GenderParameters>(context, listen: false)
-                        .changeColorFemale(),
-                color: context.watch<GenderParameters>().colorFemale(),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 15, left: 16, right: 16),
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFF1d1e33),
-              borderRadius: BorderRadius.circular(12),
             ),
-            child: const Padding(
-              padding: EdgeInsets.all(16),
-              child: SliderWidget(),
+            Padding(
+              padding: const EdgeInsets.only(top: 15, left: 16, right: 16),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1d1e33),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(16),
+                  child: SliderWidget(),
+                ),
+              ),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              WeightAgeWidget(
-                title: 'ВЕС',
-                data: '$weight кг',
-                plus: () =>
-                    context.read<WeightAgeParameters>().changeWeightPlus(),
-                minus: () =>
-                    context.read<WeightAgeParameters>().changeWeightMinus(),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  WeightAgeWidget(
+                    title: 'ВЕС',
+                    data: '$weight кг',
+                    plus: () =>
+                        context.read<WeightAgeParameters>().changeWeightPlus(),
+                    minus: () =>
+                        context.read<WeightAgeParameters>().changeWeightMinus(),
+                  ),
+                  const SizedBox(width: 20),
+                  WeightAgeWidget(
+                    title: 'ВОЗРАСТ',
+                    data: '$age',
+                    plus: () =>
+                        context.read<WeightAgeParameters>().changeAgePlus(),
+                    minus: () =>
+                        context.read<WeightAgeParameters>().changeAgeMinus(),
+                  ),
+                ],
               ),
-              const SizedBox(width: 20),
-              WeightAgeWidget(
-                title: 'ВОЗРАСТ',
-                data: '$age',
-                plus: () => context.read<WeightAgeParameters>().changeAgePlus(),
-                minus: () =>
-                    context.read<WeightAgeParameters>().changeAgeMinus(),
-              ),
-            ],
-          ),
-        ),
-        const CalculateButton(),
-      ]),
+            ),
+            const BottomButtons(),
+          ]),
     );
   }
 }
@@ -265,44 +272,71 @@ class WeightAgeWidget extends StatelessWidget {
   }
 }
 
-class CalculateButton extends StatelessWidget {
-  const CalculateButton({
+class BottomButtons extends StatelessWidget {
+  const BottomButtons({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: MaterialButton(
-          color: const Color(0xFFeb1555),
-          textColor: Colors.white,
-          onPressed: () {
-            if (context.read<GenderParameters>().isActiveMale == false &&
-                context.read<GenderParameters>().isActiveFemale == false) {
-              context.read<GenderParameters>().showMyDialog(context);
-            } else {
-              context.read<Result>().res(
-                  context,
-                  context.read<HeightParameters>().height,
-                  context.read<WeightAgeParameters>().weight);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ResultScreen()));
-            }
-          },
-          child: const SizedBox(
-            width: double.infinity,
-            height: 60,
-            child: Center(
-                child: Text(
-              'Посчитать',
-              style: TextStyle(fontSize: 25),
-            )),
+    final date = DateTime.now();
+
+    return SizedBox(
+      height: 60,
+      child: Row(
+        children: [
+          Expanded(
+            flex: 2,
+            child: MaterialButton(
+              color: const Color(0xFFeb1555),
+              textColor: Colors.white,
+              onPressed: () {
+                if (context.read<GenderParameters>().isActiveMale == false &&
+                    context.read<GenderParameters>().isActiveFemale == false) {
+                  context.read<GenderParameters>().showMyDialog(context);
+                } else {
+                  context.read<Result>().res(
+                      context,
+                      context.read<HeightParameters>().height,
+                      context.read<WeightAgeParameters>().weight);
+                  FirebaseFirestore.instance.collection('imt').doc().set({
+                    'date': date,
+                    'imt': context.read<Result>().result,
+                    'weight': context.read<WeightAgeParameters>().weight,
+                    'height': context.read<HeightParameters>().height
+                  });
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ResultScreen()));
+                }
+              },
+              child: const Center(
+                  child: Text(
+                'Посчитать',
+                style: TextStyle(fontSize: 25),
+              )),
+            ),
           ),
-        ),
+          Expanded(
+            flex: 1,
+            child: MaterialButton(
+              color: Colors.green,
+              textColor: Colors.white,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ResultListScreen()));
+              },
+              child: const Center(
+                  child: Text(
+                'Журнал',
+                style: TextStyle(fontSize: 25),
+              )),
+            ),
+          ),
+        ],
       ),
     );
   }

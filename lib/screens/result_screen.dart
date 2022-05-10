@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/result.dart';
+import 'result_list_screen.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({Key? key}) : super(key: key);
@@ -21,19 +22,17 @@ class ResultWidget extends StatelessWidget {
     return SafeArea(
       child: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Padding(
-              padding: EdgeInsets.only(top: 60),
+              padding: EdgeInsets.only(top: 40),
               child: Text(
                 'Ваш результат:',
                 style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 30,
                     color: Colors.white,
                     fontWeight: FontWeight.w700),
               ),
-            ),
-            const SizedBox(
-              height: 20,
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -89,7 +88,7 @@ class ResultWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const CalculateButton()
+            const BottomButtons()
           ],
         ),
       ),
@@ -97,30 +96,49 @@ class ResultWidget extends StatelessWidget {
   }
 }
 
-class CalculateButton extends StatelessWidget {
-  const CalculateButton({
+class BottomButtons extends StatelessWidget {
+  const BottomButtons({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: MaterialButton(
-          color: const Color(0xFFeb1555),
-          textColor: Colors.white,
-          onPressed: () => Navigator.pop(context),
-          child: const SizedBox(
-            width: double.infinity,
-            height: 60,
-            child: Center(
-                child: Text(
-              'Пересчитать',
-              style: TextStyle(fontSize: 25),
-            )),
+    return SizedBox(
+      height: 60,
+      child: Row(
+        children: [
+          Expanded(
+            flex: 2,
+            child: MaterialButton(
+              color: const Color(0xFFeb1555),
+              textColor: Colors.white,
+              onPressed: () => Navigator.pop(context),
+              child: const Center(
+                  child: Text(
+                'Вернуться назад',
+                style: TextStyle(fontSize: 25),
+              )),
+            ),
           ),
-        ),
+          Expanded(
+            flex: 1,
+            child: MaterialButton(
+              color: Colors.green,
+              textColor: Colors.white,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ResultListScreen()));
+              },
+              child: const Center(
+                  child: Text(
+                'Журнал',
+                style: TextStyle(fontSize: 25),
+              )),
+            ),
+          ),
+        ],
       ),
     );
   }
