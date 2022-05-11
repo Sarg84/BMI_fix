@@ -288,6 +288,8 @@ class BottomButtons extends StatelessWidget {
           Expanded(
             flex: 2,
             child: MaterialButton(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(0))),
               color: const Color(0xFFeb1555),
               textColor: Colors.white,
               onPressed: () {
@@ -321,6 +323,8 @@ class BottomButtons extends StatelessWidget {
           Expanded(
             flex: 1,
             child: MaterialButton(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(0))),
               color: Colors.green,
               textColor: Colors.white,
               onPressed: () {

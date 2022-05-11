@@ -11,7 +11,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  Provider.debugCheckInvalidValueType = null;
   runApp(
     MultiProvider(
       providers: [
